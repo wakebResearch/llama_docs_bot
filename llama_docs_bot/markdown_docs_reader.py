@@ -2,9 +2,8 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, cast
 
-from llama_index import SimpleDirectoryReader
-from llama_index.readers.base import BaseReader
-from llama_index.schema import Document, NodeRelationship, RelatedNodeInfo
+from llama_index.core.readers.base import BaseReader
+from llama_index.core.schema import Document, NodeRelationship, RelatedNodeInfo
 
 
 class MarkdownDocsReader(BaseReader):
@@ -50,12 +49,13 @@ class MarkdownDocsReader(BaseReader):
                     for link_match in link_matches:
                         link_text = link_match.split("](")[0].replace("[", "")
                         link_url = link_match.split("](")[1].replace(")", "")
-                        links.append(f"(link_text: {link_text}, link_url: f{link_url})")
+                        links.append(
+                            f"(link_text: {link_text}, link_url: f{link_url})")
                     markdown_docs.append(
                         Document(
                             text=current_text.strip(),
                             metadata={
-                                "File Name": filename, 
+                                "File Name": filename,
                                 "Content Type": "text",
                                 "Header Path": "/".join(header_stack),
                                 "Links": ", ".join(links),
@@ -81,7 +81,7 @@ class MarkdownDocsReader(BaseReader):
                             Document(
                                 text=current_code_block.strip(),
                                 metadata={
-                                    "File Name": filename, 
+                                    "File Name": filename,
                                     "Content Type": "code",
                                     "Header Path": "/".join(header_stack),
                                 },
@@ -97,7 +97,7 @@ class MarkdownDocsReader(BaseReader):
                             Document(
                                 text=current_code_block,
                                 metadata={
-                                    "File Name": filename, 
+                                    "File Name": filename,
                                     "Content Type": "code",
                                     "Header Path": "/".join(header_stack),
                                 },
@@ -110,12 +110,13 @@ class MarkdownDocsReader(BaseReader):
                     for link_match in link_matches:
                         link_text = link_match.split("](")[0].replace("[", "")
                         link_url = link_match.split("](")[1].replace(")", "")
-                        links.append(f"(link_text: {link_text}, link_url: f{link_url})")
+                        links.append(
+                            f"(link_text: {link_text}, link_url: f{link_url})")
                     markdown_docs.append(
                         Document(
                             text=current_text.strip(),
                             metadata={
-                                "File Name": filename, 
+                                "File Name": filename,
                                 "Content Type": "text",
                                 "Header Path": "/".join(header_stack),
                                 "Links": ", ".join(links),
@@ -127,14 +128,14 @@ class MarkdownDocsReader(BaseReader):
                     current_code_block += line + "\n"
             else:
                 current_text += line + "\n"
-        
+
         # catch remaining text
         if current_text.strip() != "":
             markdown_docs.append(
                 Document(
                     text=current_text.strip(),
                     metadata={
-                        "File Name": filename, 
+                        "File Name": filename,
                         "Content Type": "text",
                         "Header Path": "/".join(header_stack),
                     },

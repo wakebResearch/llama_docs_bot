@@ -2,7 +2,7 @@ from pathlib import Path
 
 
 from llama_docs_bot.markdown_docs_reader import MarkdownDocsReader
-from llama_index import SimpleDirectoryReader
+from llama_index.core import SimpleDirectoryReader
 
 # Make our printing look nice
 from llama_index.schema import MetadataMode
