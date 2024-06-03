@@ -26,10 +26,10 @@ from llama_index.core.query_engine import (
 
 
 # for Logging
-import logging
-import sys
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
+# import logging
+# import sys
+# logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+# logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 
 
 def load_markdown_docs(filepath) -> list[Document]:
