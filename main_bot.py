@@ -21,7 +21,8 @@ from llama_index.core.tools import QueryEngineTool
 
 # For Unified Query Engine
 from llama_index.core.response_synthesizers import get_response_synthesizer
-from llama_index.core.query_engine import SubQuestionQueryEngine
+from llama_index.core.query_engine import (
+    SubQuestionQueryEngine, RouterQueryEngine)
 
 
 # for Logging
@@ -189,7 +190,24 @@ if __name__ == '__main__':
     )
 
     """Create Unified Query Egnine"""
-    query_engine = SubQuestionQueryEngine.from_defaults(
+    # query_engine = SubQuestionQueryEngine.from_defaults(
+    #     query_engine_tools=[
+    #         getting_started_tool,
+    #         community_tool,
+    #         data_tool,
+    #         agent_tool,
+    #         model_tool,
+    #         query_tool,
+    #         supporting_tool,
+    #         tutorials_tool,
+    #         contributing_tool
+    #     ],
+    #     # enable this for streaming
+    #     # response_synthesizer=get_response_synthesizer(streaming=True),
+    #     verbose=True
+    # )
+
+    query_engine = RouterQueryEngine.from_defaults(
         query_engine_tools=[
             getting_started_tool,
             community_tool,
@@ -203,7 +221,8 @@ if __name__ == '__main__':
         ],
         # enable this for streaming
         # response_synthesizer=get_response_synthesizer(streaming=True),
-        verbose=True
+        select_multi=True,
+        verbose=True,
     )
 
     """Tesing Our Chatbot """
