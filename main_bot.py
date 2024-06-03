@@ -19,6 +19,11 @@ from llama_index.core import (
 # For Query Engine Tool
 from llama_index.core.tools import QueryEngineTool
 
+# For Unified Query Engine
+from llama_index.core.response_synthesizers import get_response_synthesizer
+from llama_index.core.query_engine import SubQuestionQueryEngine
+
+
 # for Logging
 import logging
 import sys
@@ -181,6 +186,24 @@ if __name__ == '__main__':
         query_engine=contributing_index.as_query_engine(),
         name="Contributing",
         description="Useful for answering questions about contributing to llama index, including how to contribute to the codebase and how to build documentation."
+    )
+
+    """Create Unified Query Egnine"""
+    query_engine = SubQuestionQueryEngine.from_defaults(
+        query_engine_tools=[
+            getting_started_tool,
+            community_tool,
+            data_tool,
+            agent_tool,
+            model_tool,
+            query_tool,
+            supporting_tool,
+            tutorials_tool,
+            contributing_tool
+        ],
+        # enable this for streaming
+        # response_synthesizer=get_response_synthesizer(streaming=True),
+        verbose=True
     )
 
 print('Success !')
