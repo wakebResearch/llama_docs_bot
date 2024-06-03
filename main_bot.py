@@ -12,6 +12,10 @@ from llama_docs_bot.markdown_docs_reader import MarkdownDocsReader
 # Make our printing look nice
 from llama_index.core.schema import MetadataMode, Document
 
+# For Index Database
+from llama_index.core import (
+    VectorStoreIndex, StorageContext, load_index_from_storage)
+
 # for Logging
 import logging
 import sys
@@ -57,5 +61,63 @@ if __name__ == '__main__':
         model_name="BAAI/bge-base-en-v1.5")
     # ollama
     Settings.llm = Ollama(model="llama3", request_timeout=360.0)
+
+    """Create Indicies"""
+    # create a vector store index for each folder
+    index_base_path = Path('indices')
+    if not index_base_path.is_dir():
+        index_base_path.mkdir()
+    try:
+        getting_started_index = load_index_from_storage(
+            StorageContext.from_defaults(persist_dir="./getting_started_index"))
+        community_index = load_index_from_storage(
+            StorageContext.from_defaults(persist_dir="./community_index"))
+        data_index = load_index_from_storage(
+            StorageContext.from_defaults(persist_dir="./data_index"))
+        agent_index = load_index_from_storage(
+            StorageContext.from_defaults(persist_dir="./agent_index"))
+        model_index = load_index_from_storage(
+            StorageContext.from_defaults(persist_dir="./model_index"))
+        query_index = load_index_from_storage(
+            StorageContext.from_defaults(persist_dir="./query_index"))
+        supporting_index = load_index_from_storage(
+            StorageContext.from_defaults(persist_dir="./supporting_index"))
+        tutorials_index = load_index_from_storage(
+            StorageContext.from_defaults(persist_dir="./tutorials_index"))
+        contributing_index = load_index_from_storage(
+            StorageContext.from_defaults(persist_dir="./contributing_index"))
+    except:
+        getting_started_index = VectorStoreIndex.from_documents(
+            getting_started_docs)
+        getting_started_index.storage_context.persist(
+            persist_dir="./getting_started_index")
+
+        community_index = VectorStoreIndex.from_documents(community_docs)
+        community_index.storage_context.persist(
+            persist_dir="./community_index")
+
+        data_index = VectorStoreIndex.from_documents(data_docs)
+        data_index.storage_context.persist(persist_dir="./data_index")
+
+        agent_index = VectorStoreIndex.from_documents(agent_docs)
+        agent_index.storage_context.persist(persist_dir="./agent_index")
+
+        model_index = VectorStoreIndex.from_documents(model_docs)
+        model_index.storage_context.persist(persist_dir="./model_index")
+
+        query_index = VectorStoreIndex.from_documents(query_docs)
+        query_index.storage_context.persist(persist_dir="./query_index")
+
+        supporting_index = VectorStoreIndex.from_documents(supporting_docs)
+        supporting_index.storage_context.persist(
+            persist_dir="./supporting_index")
+
+        tutorials_index = VectorStoreIndex.from_documents(tutorials_docs)
+        tutorials_index.storage_context.persist(
+            persist_dir="./tutorials_index")
+
+        contributing_index = VectorStoreIndex.from_documents(contributing_docs)
+        contributing_index.storage_context.persist(
+            persist_dir="./contributing_index")
 
     print('Success !')
