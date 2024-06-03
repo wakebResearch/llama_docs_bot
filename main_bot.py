@@ -69,55 +69,59 @@ if __name__ == '__main__':
         index_base_path.mkdir()
     try:
         getting_started_index = load_index_from_storage(
-            StorageContext.from_defaults(persist_dir="./getting_started_index"))
+            StorageContext.from_defaults(persist_dir=index_base_path / "getting_started_index"))
         community_index = load_index_from_storage(
-            StorageContext.from_defaults(persist_dir="./community_index"))
+            StorageContext.from_defaults(persist_dir=index_base_path / "community_index"))
         data_index = load_index_from_storage(
-            StorageContext.from_defaults(persist_dir="./data_index"))
+            StorageContext.from_defaults(persist_dir=index_base_path / "data_index"))
         agent_index = load_index_from_storage(
-            StorageContext.from_defaults(persist_dir="./agent_index"))
+            StorageContext.from_defaults(persist_dir=index_base_path / "agent_index"))
         model_index = load_index_from_storage(
-            StorageContext.from_defaults(persist_dir="./model_index"))
+            StorageContext.from_defaults(persist_dir=index_base_path / "model_index"))
         query_index = load_index_from_storage(
-            StorageContext.from_defaults(persist_dir="./query_index"))
+            StorageContext.from_defaults(persist_dir=index_base_path / "query_index"))
         supporting_index = load_index_from_storage(
-            StorageContext.from_defaults(persist_dir="./supporting_index"))
+            StorageContext.from_defaults(persist_dir=index_base_path / "supporting_index"))
         tutorials_index = load_index_from_storage(
-            StorageContext.from_defaults(persist_dir="./tutorials_index"))
+            StorageContext.from_defaults(persist_dir=index_base_path / "tutorials_index"))
         contributing_index = load_index_from_storage(
-            StorageContext.from_defaults(persist_dir="./contributing_index"))
+            StorageContext.from_defaults(persist_dir=index_base_path / "contributing_index"))
     except:
         getting_started_index = VectorStoreIndex.from_documents(
             getting_started_docs)
         getting_started_index.storage_context.persist(
-            persist_dir="./getting_started_index")
+            persist_dir=index_base_path / "getting_started_index")
 
         community_index = VectorStoreIndex.from_documents(community_docs)
         community_index.storage_context.persist(
-            persist_dir="./community_index")
+            persist_dir=index_base_path / "community_index")
 
         data_index = VectorStoreIndex.from_documents(data_docs)
-        data_index.storage_context.persist(persist_dir="./data_index")
+        data_index.storage_context.persist(
+            persist_dir=index_base_path / "data_index")
 
         agent_index = VectorStoreIndex.from_documents(agent_docs)
-        agent_index.storage_context.persist(persist_dir="./agent_index")
+        agent_index.storage_context.persist(
+            persist_dir=index_base_path / "agent_index")
 
         model_index = VectorStoreIndex.from_documents(model_docs)
-        model_index.storage_context.persist(persist_dir="./model_index")
+        model_index.storage_context.persist(
+            persist_dir=index_base_path / "model_index")
 
         query_index = VectorStoreIndex.from_documents(query_docs)
-        query_index.storage_context.persist(persist_dir="./query_index")
+        query_index.storage_context.persist(
+            persist_dir=index_base_path / "query_index")
 
         supporting_index = VectorStoreIndex.from_documents(supporting_docs)
         supporting_index.storage_context.persist(
-            persist_dir="./supporting_index")
+            persist_dir=index_base_path / "supporting_index")
 
         tutorials_index = VectorStoreIndex.from_documents(tutorials_docs)
         tutorials_index.storage_context.persist(
-            persist_dir="./tutorials_index")
+            persist_dir=index_base_path / "tutorials_index")
 
         contributing_index = VectorStoreIndex.from_documents(contributing_docs)
         contributing_index.storage_context.persist(
-            persist_dir="./contributing_index")
+            persist_dir=index_base_path / "contributing_index")
 
     print('Success !')
