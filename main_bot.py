@@ -5,7 +5,7 @@ from llama_docs_bot.markdown_docs_reader import MarkdownDocsReader
 from llama_index.core import SimpleDirectoryReader
 
 # Make our printing look nice
-from llama_index.schema import MetadataMode
+from llama_index.core.schema import MetadataMode
 
 
 def load_markdown_docs(filepath):
