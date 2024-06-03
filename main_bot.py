@@ -16,6 +16,9 @@ from llama_index.core.schema import MetadataMode, Document
 from llama_index.core import (
     VectorStoreIndex, StorageContext, load_index_from_storage)
 
+# For Query Engine Tool
+from llama_index.core.tools import QueryEngineTool
+
 # for Logging
 import logging
 import sys
@@ -124,4 +127,60 @@ if __name__ == '__main__':
         contributing_index.storage_context.persist(
             persist_dir=index_base_path / "contributing_index")
 
-    print('Success !')
+    """Create Qurey Engine Tool"""
+    # create a query engine tool for each folder
+    getting_started_tool = QueryEngineTool.from_defaults(
+        query_engine=getting_started_index.as_query_engine(),
+        name="Getting Started",
+        description="Useful for answering questions about installing and running llama index, as well as basic explanations of how llama index works."
+    )
+
+    community_tool = QueryEngineTool.from_defaults(
+        query_engine=community_index.as_query_engine(),
+        name="Community",
+        description="Useful for answering questions about integrations and other apps built by the community."
+    )
+
+    data_tool = QueryEngineTool.from_defaults(
+        query_engine=data_index.as_query_engine(),
+        name="Data Modules",
+        description="Useful for answering questions about data loaders, documents, nodes, and index structures."
+    )
+
+    agent_tool = QueryEngineTool.from_defaults(
+        query_engine=agent_index.as_query_engine(),
+        name="Agent Modules",
+        description="Useful for answering questions about data agents, agent configurations, and tools."
+    )
+
+    model_tool = QueryEngineTool.from_defaults(
+        query_engine=model_index.as_query_engine(),
+        name="Model Modules",
+        description="Useful for answering questions about using and configuring LLMs, embedding modles, and prompts."
+    )
+
+    query_tool = QueryEngineTool.from_defaults(
+        query_engine=query_index.as_query_engine(),
+        name="Query Modules",
+        description="Useful for answering questions about query engines, query configurations, and using various parts of the query engine pipeline."
+    )
+
+    supporting_tool = QueryEngineTool.from_defaults(
+        query_engine=supporting_index.as_query_engine(),
+        name="Supporting Modules",
+        description="Useful for answering questions about supporting modules, such as callbacks, service context, and avaluation."
+    )
+
+    tutorials_tool = QueryEngineTool.from_defaults(
+        query_engine=tutorials_index.as_query_engine(),
+        name="Tutorials",
+        description="Useful for answering questions about end-to-end tutorials and giving examples of specific use-cases."
+    )
+
+    contributing_tool = QueryEngineTool.from_defaults(
+        query_engine=contributing_index.as_query_engine(),
+        name="Contributing",
+        description="Useful for answering questions about contributing to llama index, including how to contribute to the codebase and how to build documentation."
+    )
+
+print('Success !')
