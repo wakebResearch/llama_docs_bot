@@ -206,4 +206,8 @@ if __name__ == '__main__':
         verbose=True
     )
 
-print('Success !')
+    """Tesing Our Chatbot """
+    response = query_engine.query("How do I install llama index?")
+    print(str(response))
+
+    print('Success !')
