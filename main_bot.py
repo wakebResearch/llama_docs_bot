@@ -1,14 +1,25 @@
 from pathlib import Path
 
+# For LLM and embedding model
+from llama_index.core import Settings
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.llms.ollama import Ollama
 
-from llama_docs_bot.markdown_docs_reader import MarkdownDocsReader
+# For Reading Documents
 from llama_index.core import SimpleDirectoryReader
+from llama_docs_bot.markdown_docs_reader import MarkdownDocsReader
 
 # Make our printing look nice
-from llama_index.core.schema import MetadataMode
+from llama_index.core.schema import MetadataMode, Document
+
+# for Logging
+import logging
+import sys
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 
 
-def load_markdown_docs(filepath):
+def load_markdown_docs(filepath) -> list[Document]:
     """Load markdown docs from a directory, excluding all other file types."""
     loader = SimpleDirectoryReader(
         input_dir=filepath,
@@ -23,7 +34,7 @@ def load_markdown_docs(filepath):
 
 if __name__ == '__main__':
 
-    # Load our documents from each folder.
+    """Loading Documents"""  # Load our documents from each folder.
     # we keep them seperate for now, in order to create seperate indexes later
     base_path = Path('docs')
     getting_started_docs = load_markdown_docs(base_path / "getting_started")
@@ -39,3 +50,12 @@ if __name__ == '__main__':
 
     # Printing metedata
     print(agent_docs[5].get_content(metadata_mode=MetadataMode.ALL))
+
+    """For LLM and Embedding Model"""
+    # bge-base embedding model
+    Settings.embed_model = HuggingFaceEmbedding(
+        model_name="BAAI/bge-base-en-v1.5")
+    # ollama
+    Settings.llm = Ollama(model="llama3", request_timeout=360.0)
+
+    print('Success !')
