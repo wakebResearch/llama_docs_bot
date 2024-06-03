@@ -1,2 +1,5 @@
 # Index Table
 **/indices/
+
+# pycache
+**/__pycache__/
