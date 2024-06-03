@@ -69,7 +69,7 @@ if __name__ == '__main__':
     Settings.embed_model = HuggingFaceEmbedding(
         model_name="BAAI/bge-base-en-v1.5")
     # ollama
-    Settings.llm = Ollama(model="llama3:70b", request_timeout=360.0)
+    Settings.llm = Ollama(model="llama3", request_timeout=360.0)
 
     """Create Indicies"""
     # create a vector store index for each folder
