@@ -2,8 +2,8 @@
 This is a fork from the original repository
 
 ## Tutorials
-*. The LLamaindex guide is very user-friendly walk with the docs form the start. [docs](https://docs.llamaindex.ai/en/stable/))
-*. Video Tutorial of this repo, [link](https://docs.llamaindex.ai/en/stable/getting_started/discover_llamaindex/#bottoms-up-development-llama-docs-bot). Watch video parts 1 to 5 then run the code
+* The LLamaindex guide is very user-friendly walk with the docs form the start. [docs](https://docs.llamaindex.ai/en/stable/))
+* Video Tutorial of this repo, [link](https://docs.llamaindex.ai/en/stable/getting_started/discover_llamaindex/#bottoms-up-development-llama-docs-bot). Watch video parts 1 to 5 then run the code
 
 ## Steps to run the code:
 
