@@ -1,5 +1,8 @@
 llama_index>=0.7.7
+llama-index-llms-ollama
+llama-index-embeddings-huggingface
 transformers
 torch
 sentence_transformers
 InstructorEmbedding
+pypdf
