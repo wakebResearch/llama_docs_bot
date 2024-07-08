@@ -9,14 +9,14 @@ This is a fork from the original repository
 
 1. install [ollama](https://ollama.com/)
 Then from powershell
-"""bash
+```bash
 ollama.exe pull llama3
-"""
+```
 
 Or Terminal. For linux:
-"""bash
+```bash
 ollama pull llama3
-"""
+```
 
 2. Install pytorch with cuda
 
