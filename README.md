@@ -24,6 +24,8 @@ ollama pull llama3
 
 4. `python main_bot.py`
 
+5. At the end of the code (`main_bot.py` line 229) you can play with the query to search llamaindex docs
+
 
 
 # Original Docs
